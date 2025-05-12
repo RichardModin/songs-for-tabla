@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import {
   ButtonGroup, Grid, IconButton, Typography, useTheme,
 } from '@mui/material';
@@ -11,7 +11,8 @@ function SyllableCell({
 }) {
   const [hover, setHover] = useState(false);
   const theme = useTheme();
-  const color = useRef(() => {
+
+  const getColor = () => {
     try {
       const hand = findHandForSyllable(syllable);
       switch (hand) {
@@ -25,9 +26,10 @@ function SyllableCell({
           return theme.palette.info.main;
       }
     } catch (e) {
+      console.error('Error finding hand for syllable:', e);
       return 'inherit';
     }
-  });
+  };
 
   const style = {
     border: '2px dotted black',
@@ -35,7 +37,7 @@ function SyllableCell({
     paddingBottom: 15,
     paddingLeft: 0,
     position: 'relative',
-    color: color.current(),
+    color: getColor(),
   };
 
   if (isEditing) {
