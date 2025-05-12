@@ -29,5 +29,8 @@ export default [
         { allowConstantExport: true },
       ],
     },
+    globals: {
+      __APP_VERSION__: 'readonly',
+    },
   },
 ]

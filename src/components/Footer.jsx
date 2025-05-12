@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { ExpandMore } from '@mui/icons-material';
 import allBols from '../bols';
 import BolButton from './BolButton';
+import AppVersion from "./AppVersion.jsx";
 
 function Footer(props) {
   const {
@@ -21,7 +22,9 @@ function Footer(props) {
         width: '100%',
       }}
     >
-      <AccordionSummary expandIcon={<ExpandMore />} />
+      <AccordionSummary expandIcon={<ExpandMore />}>
+        <AppVersion />
+      </AccordionSummary>
       <AccordionDetails>
         <Grid container spacing={0}>
           {Object.keys(allBols).map((hand) => {
