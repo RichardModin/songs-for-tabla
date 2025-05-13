@@ -21,6 +21,7 @@ function App() {
   const [title, setTitle] = useState(songs.title || '');
   const [isPlaying, setIsPlaying] = useState(false);
   const beat = useRef(new BeatInterval(bpm));
+  const [isOpen, setIsOpen] = useState(false);
 
   const darkTheme = createTheme({
     palette: {
@@ -31,7 +32,7 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <Container className="App" maxWidth="100%" style={{ overFlowY: 'auto' }}>
+      <Container className="App" maxWidth="100%">
         <TopMenu
           isPlaying={isPlaying}
           songs={songs}
@@ -56,6 +57,15 @@ function App() {
           saveCallback={() => {
             const newSongs = { ...songs };
             newSongs[uuid] = {
+              syllables, timeSignature, title, bpm,
+            };
+            localStorage.setItem('tabla-songs', JSON.stringify(newSongs));
+            setSongs(newSongs);
+          }}
+          saveAsCallback={() => {
+            const newSongs = { ...songs };
+            const newUuid = uuidv4();
+            newSongs[newUuid] = {
               syllables, timeSignature, title, bpm,
             };
             localStorage.setItem('tabla-songs', JSON.stringify(newSongs));
@@ -114,6 +124,7 @@ function App() {
                     setEditingIndex(-1);
                   } else {
                     setEditingIndex(index);
+                    setIsOpen(true);
                   }
                 }}
               />
@@ -125,6 +136,8 @@ function App() {
           syllables={syllables}
           setSyllables={setSyllables}
           setEditingIndex={setEditingIndex}
+          isOpen={isOpen}
+          toggleOpenCallback={() => setIsOpen(!isOpen)}
         />
       </Container>
     </ThemeProvider>

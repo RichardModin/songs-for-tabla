@@ -10,19 +10,15 @@ import AppVersion from "./AppVersion.jsx";
 
 function Footer(props) {
   const {
-    editingIndex, syllables, setSyllables, setEditingIndex,
+    editingIndex, syllables, setSyllables, setEditingIndex, toggleOpenCallback, isOpen,
   } = props;
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleOpen = () => setIsOpen(!isOpen);
 
   return (
     <>
       {/* Floating Button */}
       <Fab
         aria-label="open bols"
-        onClick={toggleOpen}
+        onClick={toggleOpenCallback}
         size="small"
         sx={{
           position: 'fixed',
@@ -45,13 +41,11 @@ function Footer(props) {
           bgcolor: 'background.paper',
           borderTop: '1px solid white',
           p: 2,
-          maxHeight: '75vh',
-          overflowY: 'auto',
           zIndex: 999,
         }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
             <AppVersion />
-            <IconButton onClick={toggleOpen} size="small">
+            <IconButton onClick={toggleOpenCallback} size="small">
               <Close />
             </IconButton>
           </Box>
@@ -103,6 +97,8 @@ Footer.propTypes = {
   syllables: PropTypes.arrayOf(PropTypes.string).isRequired,
   setSyllables: PropTypes.func.isRequired,
   setEditingIndex: PropTypes.func.isRequired,
+  toggleOpenCallback: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 };
 
 export default Footer;

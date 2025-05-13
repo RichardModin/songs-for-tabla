@@ -18,6 +18,7 @@ function TopMenu(props) {
     setTitle,
     newCallback,
     saveCallback,
+    saveAsCallback,
     onDeleteCallback,
     handleLoadCallback,
     playCallBack,
@@ -29,13 +30,10 @@ function TopMenu(props) {
   const style = isPlaying ? { color: theme.palette.success.main } : {};
 
   const fileButtons = (
-    <Grid item xs={12} sm={2}>
+    <Grid item xs={12} sm={3}>
       <ButtonGroup>
         <Button onClick={newCallback} color="inherit">
           New
-        </Button>
-        <Button onClick={saveCallback} color="inherit">
-          Save
         </Button>
         <Button
           onClick={() => {
@@ -43,7 +41,13 @@ function TopMenu(props) {
           }}
           color="inherit"
         >
-          Load
+          Open
+        </Button>
+        <Button onClick={saveCallback} color="inherit">
+          Save
+        </Button>
+        <Button onClick={saveAsCallback} color="inherit">
+          Save As
         </Button>
       </ButtonGroup>
     </Grid>
@@ -92,7 +96,7 @@ function TopMenu(props) {
   );
 
   const titleField = (
-    <Grid item xs={12} sm={12} md={12} lg={7}>
+    <Grid item xs={12} sm={12} md={12} lg={6}>
       <TextField
         id="title"
         label="Title"
