@@ -107,6 +107,7 @@ function App() {
                 onDelete={() => {
                   const newSyllables = syllables.filter((_, i) => i !== index);
                   setSyllables(newSyllables);
+                  setEditingIndex(-1);
                 }}
                 onEdit={() => {
                   if (editingIndex === index) {
@@ -119,13 +120,13 @@ function App() {
             );
           })}
         </Grid>
+        <Footer
+          editingIndex={editingIndex}
+          syllables={syllables}
+          setSyllables={setSyllables}
+          setEditingIndex={setEditingIndex}
+        />
       </Container>
-      <Footer
-        editingIndex={editingIndex}
-        syllables={syllables}
-        setSyllables={setSyllables}
-        setEditingIndex={setEditingIndex}
-      />
     </ThemeProvider>
   );
 }
